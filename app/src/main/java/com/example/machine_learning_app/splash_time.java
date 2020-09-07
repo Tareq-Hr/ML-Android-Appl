@@ -35,7 +35,7 @@ public class splash_time extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent= new Intent(splash_time.this,RaceDetaille.class);
+                Intent intent= new Intent(splash_time.this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }

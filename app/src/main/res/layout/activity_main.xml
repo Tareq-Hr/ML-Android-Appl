@@ -10,159 +10,227 @@
         android:id="@+id/searchView2"
         android:layout_width="356dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="619dp"
-        android:background="@mipmap/re"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/search_style"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Chercher une race" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="200dp"
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="411dp"
+        android:layout_height="632dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/searchView2"
+        app:layout_constraintVertical_bias="0.0">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bankcardId"
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:background="@drawable/t1">
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Les races les plus connus : "
+            android:textColor="#D18706"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.347"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.184">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="100dp"
-                    android:padding="5dp"
-                    android:textStyle="bold"
-                    android:text="Check your bank activities"
-                    android:textColor="@color/c1" />
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:text="Race X"
+                android:textColor="#D18706"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.0" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:background="@drawable/ic_oeil"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/oiseau_1" />
 
-            <LinearLayout
-                android:elevation="@dimen/cardview_compat_inset_shadow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/t2"
-                android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                app:layout_constraintVertical_bias="0.482"
+                app:srcCompat="@drawable/oiseau_1" />
 
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/oiseau_2" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="100dp"
-                    android:padding="5dp"
-                    android:text="Check your bank activities"
-                    android:textColor="@color/c1"
-                    android:textStyle="bold"/>
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                app:srcCompat="@drawable/oiseau_2" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:text="Race X"
+                android:textColor="#D18706"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="88dp"
+                android:layout_marginRight="88dp"
+                android:text="Race Y"
+                android:textColor="#D18706"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:text="Race Y"
+                android:textColor="#D18706"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintVertical_bias="0.055" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="400dp"
-        android:clipToPadding="false"
-        android:gravity="center"
+            <Button
+                android:id="@+id/button"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_oeil"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginLeft="28dp"
+                android:background="@drawable/ic_oeil"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/bankcardId1"
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:background="@drawable/t1">
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_oeil"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:textStyle="bold"
-                    android:text="Check your bank activities"
-                    android:textColor="@color/c1" />
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
+            android:background="@drawable/btn_import"
+            android:onClick="ImportImage"
+            android:src="@drawable/ic_import"
+            android:tint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.666"
+            tools:src="@drawable/ic_import"
+            tools:srcCompat="@drawable/ic_import" />
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
+            android:background="@drawable/btn_camera"
+            android:onClick="CaptureImage"
+            android:src="@drawable/ic_camera"
+            android:tint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:srcCompat="@drawable/ic_camera" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="190dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <LinearLayout
-                android:elevation="@dimen/cardview_compat_inset_shadow"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/t2"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:textStyle="bold"
-                    android:text="Check your bank activities"
-                    android:textColor="@color/c1" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
