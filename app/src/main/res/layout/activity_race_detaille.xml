@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textView_race_type"
-        android:layout_width="92dp"
-        android:layout_height="41dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="center_horizontal"
         android:shadowColor="#D7020202"
