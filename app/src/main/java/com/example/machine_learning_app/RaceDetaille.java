@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
@@ -60,7 +61,7 @@ public class RaceDetaille extends AppCompatActivity {
                 Bitmap bp = (Bitmap) getIntent().getParcelableExtra("bp");
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, out);
                 imageview.setImageBitmap(bp);
-               System.out.println(file);
+                System.out.println(file);
                 imagesStream = new FileInputStream(file);
 
             } catch (FileNotFoundException e) {
@@ -80,7 +81,7 @@ public class RaceDetaille extends AppCompatActivity {
                 .imagesFile(imagesStream)
                 .imagesFilename("Bird")
                 .threshold((float) 0.6)
-                .classifierIds(Arrays.asList("DefaultCustomModel_1395740173"))
+                .classifierIds(Arrays.asList("DefaultCustomModel_746826046"))
                 .build();
         ClassifiedImages result = service.classify(classifyOptions).execute().getResult();
         System.out.println(result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass());
@@ -93,6 +94,7 @@ public class RaceDetaille extends AppCompatActivity {
     private String BirdClass;
     private ImageView imageview;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +102,7 @@ public class RaceDetaille extends AppCompatActivity {
 
         race_type = findViewById(R.id.textView_race_type);
         imageview  =findViewById(R.id.imageView);
+
 
 
 
