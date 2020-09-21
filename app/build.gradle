@@ -37,4 +37,5 @@ dependencies {
 
     implementation 'com.ibm.watson.developer_cloud:java-sdk:6.9.0'
     implementation 'com.ibm.watson:visual-recognition:8.6.0'
+
 }
