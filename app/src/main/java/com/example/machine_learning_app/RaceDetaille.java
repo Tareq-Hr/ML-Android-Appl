@@ -2,11 +2,14 @@ package com.example.machine_learning_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,6 +29,10 @@ import java.util.Arrays;
 
 public class RaceDetaille extends AppCompatActivity {
 
+    private int progressBarStatus = 0;
+    private Handler progressBarHandler = new Handler();
+
+    private long fileSize = 0;
     public String getPrediction() {/*
         Authenticator authenticator = new IamAuthenticator("GEqKoCqVHa5qYuVyFMFyJXQuwOe9tISWcENJtRWQjiVF");
         VisualRecognition service = new VisualRecognition("2018-03-19", authenticator);
@@ -64,6 +71,7 @@ public class RaceDetaille extends AppCompatActivity {
                 System.out.println(file);
                 imagesStream = new FileInputStream(file);
 
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -87,12 +95,16 @@ public class RaceDetaille extends AppCompatActivity {
         System.out.println(result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass());
         ////
         String BirdClass = result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass();
+
         return BirdClass;
     }
 
     private TextView race_type;
     private String BirdClass;
     private ImageView imageview;
+    ProgressDialog progressDialog;
+
+
 
 
     @Override
@@ -103,15 +115,31 @@ public class RaceDetaille extends AppCompatActivity {
         race_type = findViewById(R.id.textView_race_type);
         imageview  =findViewById(R.id.imageView);
 
-
-
+        progressDialog = new ProgressDialog(RaceDetaille.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.prog);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         Thread thread =new Thread(new Runnable() {
             public void run() {
+
                 try {
                     BirdClass = getPrediction();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            progressDialog.findViewById(R.id.prog).setVisibility(View.VISIBLE);
+                            //progressDialog.dismiss();
+
+                        }
+                    });
                     System.out.println(BirdClass);
                     race_type.setText(BirdClass);
+                    progressDialog.findViewById(R.id.prog).setVisibility(View.INVISIBLE);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -119,4 +147,9 @@ public class RaceDetaille extends AppCompatActivity {
         });
         thread.start();
     }
+    /*@Override
+    public void onBackPressed(){
+        progressDialog.dismiss();
+
+    }*/
 }
