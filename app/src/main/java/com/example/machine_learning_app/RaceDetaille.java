@@ -53,7 +53,7 @@ public class RaceDetaille extends AppCompatActivity {
 
         *///2
 
-        IamAuthenticator authenticator = new IamAuthenticator("dp5-r8t8ZxMzuoyg7ZF40t9FDkawW46l-0oIwIco3694");
+        IamAuthenticator authenticator = new IamAuthenticator("YFqAdIkR1M7JfdWEyi777Uuc8SQefTzTsGVVqUcprVtW");
 
         VisualRecognition service = new VisualRecognition("2018-03-19", authenticator);
 
@@ -89,7 +89,7 @@ public class RaceDetaille extends AppCompatActivity {
                 .imagesFile(imagesStream)
                 .imagesFilename("Bird")
                 .threshold((float) 0.6)
-                .classifierIds(Arrays.asList("DefaultCustomModel_1990978699"))
+                .classifierIds(Arrays.asList("DefaultCustomModel_823799762"))
                 .build();
         ClassifiedImages result = service.classify(classifyOptions).execute().getResult();
         System.out.println(result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass());
