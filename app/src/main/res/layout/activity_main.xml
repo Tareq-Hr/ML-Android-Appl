@@ -10,10 +10,11 @@
         android:id="@+id/searchView2"
         android:layout_width="356dp"
         android:layout_height="0dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/search_style"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Chercher une race" />
@@ -32,13 +33,13 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="Les races les plus connus : "
             android:textColor="#D18706"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.347"
+            app:layout_constraintHorizontal_bias="0.286"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -201,8 +202,8 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="37dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginRight="36dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
             android:background="@drawable/btn_import"
             android:onClick="ImportImage"
             android:src="@drawable/ic_import"
@@ -210,7 +211,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.666"
+            app:layout_constraintVertical_bias="0.0"
             tools:src="@drawable/ic_import"
             tools:srcCompat="@drawable/ic_import" />
 
@@ -218,16 +219,13 @@
             android:id="@+id/imageButton2"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginRight="36dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/btn_camera"
             android:onClick="CaptureImage"
             android:src="@drawable/ic_camera"
             android:tint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:layout_editor_absoluteX="103dp"
             tools:srcCompat="@drawable/ic_camera" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
