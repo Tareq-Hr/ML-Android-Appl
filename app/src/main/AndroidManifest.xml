@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".MainActivity">
         </activity>
+        <activity android:name=".accueil">
+        </activity>
         <activity android:name=".splash_time">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
