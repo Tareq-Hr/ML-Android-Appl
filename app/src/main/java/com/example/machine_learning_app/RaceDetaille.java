@@ -15,16 +15,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.visual_recognition.v3.model.ClassifiedImages;
 import com.ibm.watson.visual_recognition.v3.model.ClassifyOptions;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -86,6 +92,7 @@ public class RaceDetaille extends AppCompatActivity {
         }else if(!getIntent().getStringExtra("path").isEmpty()) {
             try {
                 Uri uri = Uri.parse(getIntent().getStringExtra("path"));
+               // Uri uri = Uri.fromFile(new File("path/to/images/rivers.jpg"));
                 imageview.setImageURI(uri);
                 System.out.println(uri.getLastPathSegment());
                 imagesStream = new FileInputStream(uri.getLastPathSegment());
@@ -107,10 +114,12 @@ public class RaceDetaille extends AppCompatActivity {
         return BirdClass;
     }
 
-    private TextView race_type;
+    private TextView race_type, family, habitat, feeding, name;
     private String BirdClass;
-    private ImageView imageview;
+    private ImageView imageview, image1, image2, image3, image4;
     ProgressDialog progressDialog;
+
+    private StorageReference mStorageRef;
 
 
 
@@ -121,7 +130,15 @@ public class RaceDetaille extends AppCompatActivity {
         setContentView(R.layout.activity_race_detaille);
 
         race_type = findViewById(R.id.textView_race_type);
+        name = findViewById(R.id.textView3);
+        family = findViewById(R.id.textView6);
+        feeding = findViewById(R.id.textView9);
+        habitat = findViewById(R.id.textView7);
         imageview  =findViewById(R.id.imageView);
+        image1  =findViewById(R.id.imageView7);
+        image2  =findViewById(R.id.imageView8);
+        image3  =findViewById(R.id.imageView9);
+        image4  =findViewById(R.id.imageView10);
 
         progressDialog = new ProgressDialog(RaceDetaille.this);
         progressDialog.setIndeterminate(true);
@@ -148,36 +165,92 @@ public class RaceDetaille extends AppCompatActivity {
                     race_type.setText(BirdClass);
                     progressDialog.findViewById(R.id.prog).setVisibility(View.INVISIBLE);
 
+                    //Firebase
+                    // Create database instance
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference();
+
+                    mStorageRef = FirebaseStorage.getInstance().getReference();
+                    Query query = myRef.child(BirdClass.replace(' ','_'));
+
+                    final StorageReference birdRef = mStorageRef.child("/Training/ALBATROSS/3.jpg");
+
+                    System.out.println(birdRef);
+
+
+
+                    // Read from the database
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            if(dataSnapshot.exists()) {
+                                for(DataSnapshot issue : dataSnapshot.getChildren()) {
+                                    HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                                    name.setText(value.get("name").toString().replace('_',' '));
+                                    family.setText(value.get("family").toString());
+                                    habitat.setText(value.get("habitat").toString());
+                                    feeding.setText(value.get("feeding").toString());
+                                    Log.d("Firebase", "Value is: " + value);
+
+                                    final StorageReference birdRef1 = mStorageRef.child("/Training/"+BirdClass.replace(' ','_')+"/1.jpg");
+                                    birdRef1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Log.d("URI : ", uri.toString());
+                                            Picasso.get().load(uri).into(image1);
+                                        }
+                                    });
+
+                                    final StorageReference birdRef2 = mStorageRef.child("/Training/"+BirdClass.replace(' ','_')+"/2.jpg");
+                                    birdRef2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Log.d("URI : ", uri.toString());
+                                            Picasso.get().load(uri).into(image2);
+                                        }
+                                    });
+
+                                    final StorageReference birdRef3 = mStorageRef.child("/Training/"+BirdClass.replace(' ','_')+"/3.jpg");
+                                    birdRef3.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Log.d("URI : ", uri.toString());
+                                            Picasso.get().load(uri).into(image3);
+                                        }
+                                    });
+
+                                    final StorageReference birdRef4 = mStorageRef.child("/Training/"+BirdClass.replace(' ','_')+"/4.jpg");
+                                    birdRef4.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            Log.d("URI : ", uri.toString());
+                                            Picasso.get().load(uri).into(image4);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Log.w("Firebase", "Failed to read value.", error.toException());
+                        }
+    /*@Override
+    public void onBackPressed(){
+        progressDialog.dismiss();
+
+}*/
+                    });
+                    //
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
-        /*/ Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                                            // This method is called once with the initial value and again
-                                            // whenever data at this location is updated.
-                GenericTypeIndicator value = dataSnapshot.getValue(GenericTypeIndicator.class);
-                                            Log.d("Firebase", "Value is: " + value);
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(DatabaseError error) {
-                                            // Failed to read value
-                                            Log.w("Firebase", "Failed to read value.", error.toException());
-                                        }
-    /*@Override
-    public void onBackPressed(){
-        progressDialog.dismiss();
-
-
-});}*/
     }
 }
