@@ -1,9 +1,13 @@
 package com.example.machine_learning_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -99,6 +103,9 @@ public class RaceDetaille extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        }else if(!getIntent().getStringExtra("raceName").isEmpty()){
+            race_type.setText(getIntent().getStringExtra("raceName"));
+            imageview.setImageResource(getIntent().getIntExtra("image",0));
         }
         ClassifyOptions classifyOptions = new ClassifyOptions.Builder()
                 .imagesFile(imagesStream)
@@ -109,7 +116,7 @@ public class RaceDetaille extends AppCompatActivity {
         ClassifiedImages result = service.classify(classifyOptions).execute().getResult();
         System.out.println(result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass());
         ////
-        String BirdClass = result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass();
+            BirdClass = result.getImages().get(0).getClassifiers().get(0).getClasses().get(0).getXClass();
 
         return BirdClass;
     }
@@ -120,8 +127,6 @@ public class RaceDetaille extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private StorageReference mStorageRef;
-
-
 
 
     @Override
@@ -147,23 +152,33 @@ public class RaceDetaille extends AppCompatActivity {
         progressDialog.setContentView(R.layout.prog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
+
+
         Thread thread =new Thread(new Runnable() {
             public void run() {
-
                 try {
-                    BirdClass = getPrediction();
+                    BirdClass = getIntent().getStringExtra("raceName");
+                    if(BirdClass == null){
+                        BirdClass = getPrediction();
+                        race_type.setText(BirdClass);
+                    }else{
+                        BirdClass = getIntent().getStringExtra("raceName");
+                        imageview.setImageResource(getIntent().getIntExtra("image",0));
+                        race_type.setText(BirdClass);
+                        progressDialog.findViewById(R.id.prog).setVisibility(View.INVISIBLE);
+                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run()
                         {
                             progressDialog.findViewById(R.id.prog).setVisibility(View.VISIBLE);
-                            //progressDialog.dismiss();
-
+                            progressDialog.findViewById(R.id.prog).setVisibility(View.INVISIBLE);
+                            progressDialog.dismiss();
                         }
                     });
                     System.out.println(BirdClass);
                     race_type.setText(BirdClass);
-                    progressDialog.findViewById(R.id.prog).setVisibility(View.INVISIBLE);
+
 
                     //Firebase
                     // Create database instance
@@ -238,11 +253,6 @@ public class RaceDetaille extends AppCompatActivity {
                             // Failed to read value
                             Log.w("Firebase", "Failed to read value.", error.toException());
                         }
-    /*@Override
-    public void onBackPressed(){
-        progressDialog.dismiss();
-
-}*/
                     });
                     //
 
@@ -252,5 +262,8 @@ public class RaceDetaille extends AppCompatActivity {
             }
         });
         thread.start();
+
     }
+
+
 }

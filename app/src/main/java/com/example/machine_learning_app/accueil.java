@@ -45,6 +45,12 @@ public class accueil extends AppCompatActivity {
         }
     }
 
+    public void goToDetail(View view){
+        Intent intent = new Intent(accueil.this, RaceDetaille.class);
+        intent.putExtra("race_name", birdList);
+        startActivity(intent);
+    }
+
     public void CaptureImage(View view) {
         if (hasPermissions(accueil.this, CAPTURE_PERMISSIONS)){
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -118,4 +124,5 @@ public class accueil extends AppCompatActivity {
         MyAdapter myAdapter=new MyAdapter(this,R.layout.grid,birdList);
         simpleList.setAdapter(myAdapter);
     }
+
 }
